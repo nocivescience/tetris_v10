@@ -83,13 +83,17 @@ class GameModel{
     }
     moveDown(){
         if(this.fallingPiece!==null){
-            console.log('a no!')
+            // console.log('a no!')
             this.fallingPiece=null;
         }
     }
 }
 const model= new GameModel(ctx);
 setInterval(()=>{
+    newGameState()
+},1000)
+function newGameState(){
+    fullSend()
     score++
     countEl.innerText=`esto es ${score}`;
     if(score%3===0){
@@ -105,4 +109,19 @@ setInterval(()=>{
     }else{
         model.moveDown();
     }
-},1000)
+}
+function fullSend(){
+    const allFilled=(row)=>{
+        for(let x of row){
+            if(x===0){
+                return false;
+            }
+        }
+        return true;
+    };
+    for(let i=0;i<model.grid.length;i++){
+        if(allFilled(model.grid[i])){
+            console.log('ihi')
+        }
+    }
+}
